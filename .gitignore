@@ -1,0 +1,6 @@
+# design-notes 只作本地设计参考，不发布
+design-notes/
+
+# 系统文件
+.DS_Store
+README.md

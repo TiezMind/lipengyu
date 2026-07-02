@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="Self-evolving reasoning: dual feedback loops around a core with a rising optimization curve">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#F5F9FD"/>
+      <stop offset="1" stop-color="#E3ECF8"/>
+    </linearGradient>
+    <pattern id="dots" width="15" height="15" patternUnits="userSpaceOnUse">
+      <circle cx="1.4" cy="1.4" r="1.1" fill="#C8D6EC"/>
+    </pattern>
+    <marker id="ah" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1F4E9B"/></marker>
+    <marker id="ahr" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#DE4C34"/></marker>
+    <marker id="ahg" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#2E9E6B"/></marker>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <rect width="320" height="200" fill="url(#dots)" opacity="0.55"/>
+  <circle cx="18" cy="21" r="3.4" fill="#1F4E9B"/>
+  <text x="27" y="24.8" font-family="'Inter',-apple-system,'Segoe UI',Roboto,sans-serif" font-size="11" font-weight="700" fill="#254a86" letter-spacing="0.2">Self-Evolving Reasoning</text>
+
+  <!-- outer feedback loop -->
+  <path d="M118 66 A 46 46 0 1 0 156 138" fill="none" stroke="#DE4C34" stroke-width="2.2" marker-end="url(#ahr)"/>
+  <!-- inner feedback loop -->
+  <path d="M118 82 A 30 30 0 1 1 92 99" fill="none" stroke="#1F4E9B" stroke-width="2.2" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+  <!-- core -->
+  <circle cx="118" cy="112" r="22" fill="#EAF1FB" stroke="#1F4E9B" stroke-width="2.4"/>
+  <polyline points="107,117 118,105 129,118" fill="none" stroke="#1F4E9B" stroke-width="1.8"/>
+  <circle cx="107" cy="117" r="3.4" fill="#1F4E9B"/><circle cx="118" cy="105" r="3.4" fill="#DE4C34"/><circle cx="129" cy="118" r="3.4" fill="#1F4E9B"/>
+
+  <!-- optimization gain -->
+  <g stroke="#C3D0E3" stroke-width="1.5"><line x1="198" y1="60" x2="198" y2="164"/><line x1="198" y1="164" x2="306" y2="164"/></g>
+  <polyline points="204,154 228,136 250,142 274,104 298,84" fill="none" stroke="#2E9E6B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#ahg)"/>
+  <g fill="#2E9E6B"><circle cx="204" cy="154" r="3"/><circle cx="228" cy="136" r="3"/><circle cx="250" cy="142" r="3"/><circle cx="274" cy="104" r="3"/></g>
+</svg>

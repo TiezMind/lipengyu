@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="LLM unlearning: a knowledge grid with two nodes removed, and an orthogonality symbol">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#F5F9FD"/>
+      <stop offset="1" stop-color="#E3ECF8"/>
+    </linearGradient>
+    <pattern id="dots" width="15" height="15" patternUnits="userSpaceOnUse">
+      <circle cx="1.4" cy="1.4" r="1.1" fill="#C8D6EC"/>
+    </pattern>
+    <marker id="ah" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1F4E9B"/>
+    </marker>
+    <marker id="ahr" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#DE4C34"/>
+    </marker>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <rect width="320" height="200" fill="url(#dots)" opacity="0.55"/>
+  <circle cx="18" cy="21" r="3.4" fill="#1F4E9B"/>
+  <text x="27" y="24.8" font-family="'Inter',-apple-system,'Segoe UI',Roboto,sans-serif" font-size="11" font-weight="700" fill="#254a86" letter-spacing="0.2">LLM Unlearning</text>
+
+  <!-- knowledge model card -->
+  <rect x="38" y="64" width="132" height="100" rx="16" fill="#EAF1FB" stroke="#1F4E9B" stroke-width="2.2"/>
+  <!-- retained knowledge nodes -->
+  <g fill="#6E93CE">
+    <circle cx="66" cy="98" r="6.5"/><circle cx="104" cy="98" r="6.5"/>
+    <circle cx="66" cy="124" r="6.5"/><circle cx="104" cy="124" r="6.5"/><circle cx="142" cy="124" r="6.5"/>
+    <circle cx="104" cy="150" r="6.5"/><circle cx="142" cy="150" r="6.5"/>
+  </g>
+  <!-- forgotten nodes -->
+  <g>
+    <circle cx="142" cy="98" r="7.5" fill="#DE4C34"/>
+    <path d="M138 94 L146 102 M146 94 L138 102" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="66" cy="150" r="7.5" fill="#DE4C34"/>
+    <path d="M62 146 L70 154 M70 146 L62 154" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+  </g>
+  <!-- adversarial gating: eject forgotten knowledge -->
+  <path d="M152 96 C 188 78 210 78 230 84" fill="none" stroke="#DE4C34" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#ahr)"/>
+  <circle cx="246" cy="82" r="8" fill="none" stroke="#DE4C34" stroke-width="1.8" stroke-dasharray="3 3"/>
+  <path d="M242 78 L250 86 M250 78 L242 86" stroke="#DE4C34" stroke-width="1.8" stroke-linecap="round"/>
+
+  <!-- adaptive orthogonality symbol -->
+  <g stroke="#1F4E9B" fill="none" stroke-width="2.2" stroke-linecap="round">
+    <line x1="236" y1="152" x2="236" y2="112" marker-end="url(#ah)"/>
+    <line x1="236" y1="152" x2="286" y2="152" marker-end="url(#ah)"/>
+  </g>
+  <path d="M236 141 L247 141 L247 152" fill="none" stroke="#1F4E9B" stroke-width="1.5"/>
+</svg>

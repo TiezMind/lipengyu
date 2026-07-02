@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="Process reward model: a chain of reasoning steps scored step by step, with a physics trajectory">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#F5F9FD"/>
+      <stop offset="1" stop-color="#E3ECF8"/>
+    </linearGradient>
+    <pattern id="dots" width="15" height="15" patternUnits="userSpaceOnUse">
+      <circle cx="1.4" cy="1.4" r="1.1" fill="#C8D6EC"/>
+    </pattern>
+    <marker id="ah" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1F4E9B"/>
+    </marker>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <rect width="320" height="200" fill="url(#dots)" opacity="0.55"/>
+  <circle cx="18" cy="21" r="3.4" fill="#1F4E9B"/>
+  <text x="27" y="24.8" font-family="'Inter',-apple-system,'Segoe UI',Roboto,sans-serif" font-size="11" font-weight="700" fill="#254a86" letter-spacing="0.2">Process Reward Model</text>
+
+  <!-- physics trajectory -->
+  <path d="M44 102 Q 122 24 200 102" fill="none" stroke="#6E93CE" stroke-width="2.2" stroke-dasharray="5 4"/>
+  <circle cx="44" cy="102" r="4.6" fill="#E9A23B"/>
+  <circle cx="200" cy="102" r="4.6" fill="#E9A23B" opacity="0.55"/>
+
+  <!-- step chain -->
+  <g stroke="#1F4E9B" stroke-width="2.2" marker-end="url(#ah)">
+    <line x1="61" y1="150" x2="85" y2="150"/><line x1="115" y1="150" x2="139" y2="150"/>
+    <line x1="169" y1="150" x2="193" y2="150"/><line x1="223" y1="150" x2="250" y2="150"/>
+  </g>
+  <g font-family="'Inter',-apple-system,'Segoe UI',Roboto,sans-serif" font-size="10" font-weight="700" text-anchor="middle">
+    <circle cx="46" cy="150" r="15" fill="#EAF1FB" stroke="#1F4E9B" stroke-width="2.2"/><text x="46" y="153.6" fill="#1F4E9B">S1</text>
+    <circle cx="100" cy="150" r="15" fill="#EAF1FB" stroke="#1F4E9B" stroke-width="2.2"/><text x="100" y="153.6" fill="#1F4E9B">S2</text>
+    <circle cx="154" cy="150" r="15" fill="#EAF1FB" stroke="#1F4E9B" stroke-width="2.2"/><text x="154" y="153.6" fill="#1F4E9B">S3</text>
+    <circle cx="208" cy="150" r="15" fill="#EAF1FB" stroke="#1F4E9B" stroke-width="2.2"/><text x="208" y="153.6" fill="#1F4E9B">S4</text>
+    <circle cx="272" cy="150" r="16" fill="#1F4E9B"/><text x="272" y="154" fill="#fff" font-size="13">R</text>
+  </g>
+
+  <!-- step rewards (fine-grained diagnosis) -->
+  <g>
+    <circle cx="46" cy="118" r="8.5" fill="#2E9E6B"/><path d="M42 118 L45 121.5 L50.5 114.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="100" cy="118" r="8.5" fill="#2E9E6B"/><path d="M96 118 L99 121.5 L104.5 114.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="154" cy="118" r="8.5" fill="#DE4C34"/><path d="M150.5 114.5 L157.5 121.5 M157.5 114.5 L150.5 121.5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="208" cy="118" r="8.5" fill="#2E9E6B"/><path d="M204 118 L207 121.5 L212.5 114.5" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g stroke="#C3D0E3" stroke-width="1.4" stroke-dasharray="2 3">
+    <line x1="46" y1="127" x2="46" y2="135"/><line x1="100" y1="127" x2="100" y2="135"/><line x1="154" y1="127" x2="154" y2="135"/><line x1="208" y1="127" x2="208" y2="135"/>
+  </g>
+</svg>

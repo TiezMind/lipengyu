@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="Cross-modal reasoning: an image and text distilled into a unified reasoning node with a self-distillation loop">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#F5F9FD"/>
+      <stop offset="1" stop-color="#E3ECF8"/>
+    </linearGradient>
+    <pattern id="dots" width="15" height="15" patternUnits="userSpaceOnUse">
+      <circle cx="1.4" cy="1.4" r="1.1" fill="#C8D6EC"/>
+    </pattern>
+    <marker id="ah" viewBox="0 0 10 10" refX="7.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1F4E9B"/>
+    </marker>
+  </defs>
+  <rect width="320" height="200" fill="url(#bg)"/>
+  <rect width="320" height="200" fill="url(#dots)" opacity="0.55"/>
+  <circle cx="18" cy="21" r="3.4" fill="#1F4E9B"/>
+  <text x="27" y="24.8" font-family="'Inter',-apple-system,'Segoe UI',Roboto,sans-serif" font-size="11" font-weight="700" fill="#254a86" letter-spacing="0.2">Multimodal Reasoning</text>
+
+  <!-- image modality tile -->
+  <rect x="34" y="58" width="66" height="50" rx="9" fill="#FBFDFF" stroke="#1F4E9B" stroke-width="2"/>
+  <circle cx="54" cy="74" r="6" fill="#E9A23B"/>
+  <path d="M38 105 L56 84 L68 96 L82 81 L96 105 Z" fill="#6E93CE"/>
+  <!-- text modality tile -->
+  <rect x="34" y="122" width="66" height="50" rx="9" fill="#FBFDFF" stroke="#1F4E9B" stroke-width="2"/>
+  <g stroke="#6E93CE" stroke-width="3.2" stroke-linecap="round">
+    <line x1="45" y1="137" x2="89" y2="137"/><line x1="45" y1="149" x2="91" y2="149"/><line x1="45" y1="161" x2="74" y2="161"/>
+  </g>
+  <!-- fuse arrows -->
+  <g stroke="#1F4E9B" stroke-width="2.2" fill="none" stroke-linecap="round">
+    <line x1="102" y1="84" x2="150" y2="103" marker-end="url(#ah)"/>
+    <line x1="102" y1="146" x2="150" y2="122" marker-end="url(#ah)"/>
+  </g>
+  <!-- unified reasoning node -->
+  <circle cx="182" cy="112" r="30" fill="#EAF1FB" stroke="#1F4E9B" stroke-width="2.4"/>
+  <g>
+    <polyline points="170,116 182,106 194,117" fill="none" stroke="#1F4E9B" stroke-width="1.8"/>
+    <circle cx="170" cy="116" r="3.6" fill="#1F4E9B"/><circle cx="182" cy="106" r="3.6" fill="#1F4E9B"/><circle cx="194" cy="117" r="3.6" fill="#DE4C34"/>
+  </g>
+  <!-- self-distillation loop -->
+  <path d="M182 78 A 34 34 0 1 1 151 97" fill="none" stroke="#1F4E9B" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+  <!-- output answer -->
+  <line x1="212" y1="112" x2="246" y2="112" stroke="#1F4E9B" stroke-width="2.2" marker-end="url(#ah)"/>
+  <rect x="250" y="99" width="46" height="26" rx="8" fill="#1F4E9B"/>
+  <path d="M266 112 L271 118 L281 106" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

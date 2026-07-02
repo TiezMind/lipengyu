@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pengyu Li (李鹏宇)</title>
+<meta name="description" content="Pengyu Li (李鹏宇) — M.S. student at Xi'an Jiaotong University working on large language models, multimodal & omni-modal foundation models, and LLM post-training.">
+<meta name="author" content="Pengyu Li">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F4E9B'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-weight='700' fill='white' text-anchor='middle'%3EPL%3C/text%3E%3C/svg%3E">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pengyu Li (李鹏宇)">
+<meta property="og:description" content="M.S. student at Xi'an Jiaotong University — LLMs, multimodal & omni-modal foundation models, LLM post-training.">
+
+<!-- Fonts (degrade gracefully to system stack if the CDN is blocked) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+
+<!-- Pre-paint theme init: avoids a flash of the wrong theme -->
+<script>
+(function(){try{var t=localStorage.getItem('theme');if(!t)t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+
+<style>
+:root{
+  --bg:#FFFFFF;        --bg-elev:#F7F8FA;   --surface:#FFFFFF;
+  --text:#2B2F36;      --text-muted:#6B7280;--text-strong:#14171C;
+  --link:#1F4E9B;      --link-hover:#16386F;
+  --accent:#B42318;    --news-hl:#C2410C;   --star:#D9A300;   --ok:#2E7D57;
+  --border:#ECEEF1;    --border-strong:#DDE1E6;
+  --pill-bg:#EEF2F8;   --news-date-bg:#EAF1FB;
+  --shadow-card:0 4px 14px rgba(20,23,28,.08);
+  --shadow-hover:0 10px 26px rgba(20,23,28,.14);
+  --radius:10px;
+  --font-body:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'PingFang SC','Microsoft YaHei',sans-serif;
+  --font-head:'Source Serif 4',Georgia,'Songti SC',serif;
+  --font-mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
+}
+:root[data-theme=dark]{
+  --bg:#0F1115;        --bg-elev:#171A21;   --surface:#141821;
+  --text:#D4D7DD;      --text-muted:#9AA1AC;--text-strong:#F3F4F6;
+  --link:#6FA8FF;      --link-hover:#A9CBFF;
+  --accent:#FF6B5E;    --news-hl:#FDBA74;   --star:#E6B800;   --ok:#4ECB8D;
+  --border:#262B34;    --border-strong:#333A45;
+  --pill-bg:#1F242D;   --news-date-bg:#12233D;
+  --shadow-card:0 4px 14px rgba(0,0,0,.35);
+  --shadow-hover:0 10px 26px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:var(--font-body); font-size:16px; line-height:1.65;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+a{color:var(--link); text-decoration:none; transition:color .15s}
+a:hover{color:var(--link-hover)}
+h1,h2,h3{font-family:var(--font-head); color:var(--text-strong); line-height:1.2}
+.icon{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.14em}
+
+/* ---------- top navigation ---------- */
+.topnav{position:sticky; top:0; z-index:40;
+  background:color-mix(in srgb,var(--bg) 85%, transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+          backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--border);}
+.topnav-inner{max-width:1140px; margin:0 auto; padding:0 24px; height:60px;
+  display:flex; align-items:center; gap:14px;}
+.topnav-brand{flex:none; display:flex; align-items:baseline; gap:6px;
+  font-family:var(--font-head); font-weight:700; font-size:1.08rem;
+  color:var(--text-strong); white-space:nowrap;}
+.topnav-brand:hover{color:var(--link);}
+.topnav-brand .cn{font-family:var(--font-body); font-size:.82rem; font-weight:600; color:var(--text-muted);}
+.topnav-links{flex:1 1 auto; min-width:0; display:flex; align-items:center;
+  justify-content:flex-end; gap:1px; overflow-x:auto; scrollbar-width:none;}
+.topnav-links::-webkit-scrollbar{display:none;}
+.topnav-links a{padding:7px 10px; border-radius:7px; white-space:nowrap;
+  color:var(--text-muted); font-size:.89rem; font-weight:600;}
+.topnav-links a:hover{color:var(--link); background:var(--bg-elev);}
+
+/* ---------- layout ---------- */
+.layout{display:grid; grid-template-columns:296px 1fr; gap:54px;
+  max-width:1140px; margin:0 auto; padding:40px 28px 84px;}
+.sidebar{position:sticky; top:84px; align-self:start;}
+.content{min-width:0;}
+
+/* ---------- sidebar ---------- */
+.avatar{width:190px; height:190px; border-radius:50%; object-fit:cover;
+  object-position:50% 18%; border:4px solid var(--surface);
+  box-shadow:var(--shadow-card); display:block; margin:0 auto 22px;}
+.name{font-size:1.9rem; font-weight:700; margin:0; text-align:center; letter-spacing:-.3px;}
+.name .cn{font-family:var(--font-body); font-size:1.05rem; font-weight:600;
+  color:var(--text-muted); margin-left:8px;}
+.tagline{text-align:center; color:var(--text-muted); font-size:.94rem;
+  margin:8px 0 0; line-height:1.5;}
+.tagline b{color:var(--text-strong); font-weight:600;}
+.profile-info{list-style:none; margin:20px 0 0; padding:16px 2px 0; text-align:left;
+  border-top:1px solid var(--border); display:flex; flex-direction:column; gap:3px;}
+.profile-info li{display:flex; align-items:center; gap:11px; font-size:.92rem;
+  line-height:1.5; color:var(--text-muted);}
+.profile-info a{display:flex; align-items:center; gap:11px; width:100%;
+  padding:5px 8px; margin:-3px -8px; border-radius:8px; color:var(--text); font-weight:500;}
+.profile-info a:hover{color:var(--link); background:var(--bg-elev);}
+.profile-info .icon{flex:none; color:var(--link); width:1.06em; height:1.06em; stroke-width:2;}
+
+/* ---------- sections ---------- */
+.section{margin-bottom:46px; scroll-margin-top:76px;}
+.section-title{font-size:1.5rem; font-weight:700; margin:0 0 18px;
+  padding-bottom:8px; border-bottom:2px solid var(--border); display:flex; align-items:center; gap:11px;}
+.section-title .icon{color:var(--link); width:.95em; height:.95em; stroke-width:2.1;}
+.lead{margin-top:0}
+.intro-list{margin:12px 0 0; padding-left:0; list-style:none;}
+.intro-list li{position:relative; padding-left:22px; margin-bottom:7px; line-height:1.55;}
+.intro-list li::before{content:""; position:absolute; left:2px; top:.62em;
+  width:7px; height:7px; border-radius:2px; background:var(--link); transform:rotate(45deg);}
+
+/* ---------- news ---------- */
+.news-scroll{max-height:288px; overflow-y:auto; padding:16px 20px;
+  border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-elev);
+  -webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 26px),transparent);
+          mask-image:linear-gradient(to bottom,#000 calc(100% - 26px),transparent);
+  scrollbar-width:thin; scrollbar-color:var(--border-strong) transparent;}
+.news-scroll::-webkit-scrollbar{width:7px;}
+.news-scroll::-webkit-scrollbar-thumb{background:var(--border-strong); border-radius:4px;}
+.news-scroll::-webkit-scrollbar-thumb:hover{background:var(--link);}
+.news-list{list-style:none; margin:0; padding:0;}
+.news-list li{margin-bottom:12px; line-height:1.6; font-size:.95rem; display:flex; gap:10px;}
+.news-list li:last-child{margin-bottom:0;}
+.news-date{flex:none; padding:2px 9px; border-radius:5px; height:fit-content;
+  background:var(--news-date-bg); color:var(--link); font-family:var(--font-mono);
+  font-size:.78rem; font-weight:700; font-feature-settings:"tnum"; white-space:nowrap;}
+.news-hl{color:var(--news-hl); font-weight:700;}
+
+/* ---------- publications ---------- */
+.pub-legend{font-size:.85rem; color:var(--text-muted); margin:-6px 0 16px;}
+.publication{display:flex; gap:24px; align-items:flex-start;
+  padding:22px 0; border-bottom:1px solid var(--border);}
+.publication:first-of-type{padding-top:2px;}
+.publication:last-child{border-bottom:none;}
+.pub-thumb-wrap{flex:0 0 200px; display:block; overflow:hidden; border-radius:var(--radius);}
+.pub-thumb{display:block; width:200px; aspect-ratio:16/10; object-fit:cover;
+  border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-elev);
+  box-shadow:var(--shadow-card); transition:transform .25s ease, box-shadow .25s ease;}
+.publication:hover .pub-thumb{transform:scale(1.035); box-shadow:var(--shadow-hover);}
+.pub-content{flex:1; min-width:0;}
+.pub-title{display:block; font-family:var(--font-head); font-size:1.08rem;
+  font-weight:700; line-height:1.4; color:var(--text-strong); margin-bottom:6px;}
+a.pub-title:hover{color:var(--link);}
+.pub-venue{display:flex; flex-wrap:wrap; align-items:baseline; gap:8px; margin:2px 0 6px;}
+.venue{font-weight:700; color:var(--text-strong); font-size:.98rem;}
+.venue.top{color:var(--accent);}
+.venue.preprint{color:var(--text-muted); font-style:italic; font-weight:600;}
+.badge-award{color:var(--accent); font-weight:800; font-size:.9rem;}
+.badge-award::before{content:"· ";}
+.tier{font-size:.72rem; font-weight:700; letter-spacing:.3px; text-transform:uppercase;
+  color:var(--text-muted); background:var(--pill-bg); border:1px solid var(--border);
+  padding:1px 7px; border-radius:5px;}
+.status{font-size:.8rem; font-weight:600; color:var(--text-muted); font-style:italic;}
+.pub-authors{font-size:.94rem; line-height:1.55; color:var(--text); margin:4px 0;}
+.me{color:var(--text-strong); font-weight:700; border-bottom:2px solid var(--accent);}
+.pub-links{display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin-top:10px;}
+.pub-links a{display:inline-flex; align-items:center; gap:6px; font-size:.8rem;
+  font-weight:700; letter-spacing:.4px; text-transform:uppercase; color:var(--link);}
+.pub-links a:hover{color:var(--link-hover);}
+.pub-links .icon{width:.95em; height:.95em;}
+.pub-stat{display:inline-flex; align-items:center; gap:5px; padding:2px 10px;
+  border-radius:50px; background:var(--pill-bg); font-size:.76rem; font-weight:700; color:var(--text-muted);}
+.pub-stat .icon{color:var(--star); fill:var(--star); stroke:var(--star); width:.9em; height:.9em;}
+
+/* ---------- experience / education ---------- */
+.entry{display:flex; gap:18px; padding:18px 0; border-bottom:1px solid var(--border);}
+.entry:last-child{border-bottom:none;}
+.entry-logo{flex:0 0 54px; height:54px; border-radius:12px; background:#fff;
+  border:1px solid var(--border); display:flex; align-items:center; justify-content:center; padding:9px;
+  box-shadow:var(--shadow-card);}
+.entry-logo img{max-width:100%; max-height:100%; object-fit:contain;}
+.entry-body{flex:1; min-width:0;}
+.entry-head{display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap;}
+.entry-role{font-weight:700; color:var(--text-strong); font-size:1.02rem;}
+.entry-org{color:var(--link); font-weight:600;}
+.entry-date{color:var(--text-muted); font-size:.86rem; font-family:var(--font-mono);
+  font-feature-settings:"tnum"; white-space:nowrap;}
+.entry-sub{color:var(--text-muted); font-size:.9rem; margin:1px 0 8px;}
+.entry-desc{font-size:.94rem; line-height:1.62; margin:0; color:var(--text);}
+
+/* ---------- honors / skills ---------- */
+.honor-featured{display:flex; gap:12px; align-items:flex-start; position:relative;
+  background:linear-gradient(100deg, color-mix(in srgb,var(--accent) 8%, transparent), transparent 70%);
+  border:1px solid var(--border); border-left:3px solid var(--accent);
+  border-radius:8px; padding:13px 16px; margin-bottom:14px;}
+.honor-featured .icon{color:var(--accent); flex:none; margin-top:2px;}
+.honor-featured b{color:var(--text-strong);}
+.honor-list{list-style:none; margin:0; padding:0; columns:2; column-gap:32px;}
+.honor-list li{position:relative; padding-left:20px; margin-bottom:9px; line-height:1.5;
+  font-size:.93rem; break-inside:avoid;}
+.honor-list li::before{content:""; position:absolute; left:3px; top:.6em;
+  width:6px; height:6px; border-radius:50%; background:var(--accent); opacity:.7;}
+.honor-list b{color:var(--text-strong);}
+.skill-row{margin-bottom:14px;}
+.skill-label{font-weight:700; color:var(--text-strong); font-size:.95rem; margin-bottom:6px;}
+.chips{display:flex; flex-wrap:wrap; gap:7px;}
+.chip{font-size:.82rem; padding:3px 11px; border-radius:50px; background:var(--pill-bg);
+  border:1px solid var(--border); color:var(--text);}
+
+/* ---------- theme toggle ---------- */
+.theme-toggle{flex:none; width:38px; height:38px; border-radius:9px;
+  border:1px solid var(--border); background:var(--surface);
+  color:var(--text-muted); cursor:pointer; display:flex; align-items:center; justify-content:center;
+  font-size:18px; transition:color .15s, background .15s;}
+.theme-toggle:hover{color:var(--link); background:var(--bg-elev);}
+:root[data-theme=dark] .theme-toggle .i-sun{display:block;}
+:root[data-theme=dark] .theme-toggle .i-moon{display:none;}
+:root[data-theme=light] .theme-toggle .i-sun{display:none;}
+:root[data-theme=light] .theme-toggle .i-moon{display:block;}
+
+/* ---------- footer ---------- */
+.footer{border-top:1px solid var(--border); margin-top:20px; padding-top:20px;
+  color:var(--text-muted); font-size:.84rem; text-align:center;}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  .layout{grid-template-columns:1fr; gap:30px; padding:28px 20px 60px;}
+  .sidebar{position:static;}
+  .topnav-inner{padding:0 16px; gap:10px; height:54px;}
+  .avatar{width:150px; height:150px;}
+  .honor-list{columns:1;}
+  .publication{flex-direction:column; gap:14px;}
+  .pub-thumb-wrap{flex:none; width:100%;}
+  .pub-thumb{width:100%; aspect-ratio:16/9;}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important; scroll-behavior:auto !important;}
+  .publication:hover .pub-thumb{transform:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- inline icon set (Feather-style, no CDN dependency) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol>
+<symbol id="i-github" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></symbol>
+<symbol id="i-scholar" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/><path d="M22 10v6"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="15" y2="17"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+<symbol id="i-news" viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8V6Z"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+<symbol id="i-work" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+<symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></symbol>
+<symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89 7 22l5-3 5 3-1.21-8.11"/></symbol>
+<symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.7 2.7-2-2 2.7-2.7z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+</defs></svg>
+
+<!-- ============ TOP NAV ============ -->
+<nav class="topnav" aria-label="Section navigation">
+  <div class="topnav-inner">
+    <a class="topnav-brand" href="#about">Pengyu Li<span class="cn">李鹏宇</span></a>
+    <div class="topnav-links">
+      <a href="#about">About</a>
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#honors">Honors</a>
+      <a href="#skills">Skills</a>
+    </div>
+    <button class="theme-toggle" onclick="(function(){var d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}})()" aria-label="Toggle dark mode">
+      <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+      <svg class="icon i-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="layout">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <img class="avatar" src="assets/avatar.jpg" alt="Portrait of Pengyu Li">
+    <h1 class="name">Pengyu Li<span class="cn">李鹏宇</span></h1>
+    <p class="tagline">M.S. Student in <b>Computer Science &amp; Technology</b><br>Large Language Models · Multimodal · Omni-modal</p>
+    <ul class="profile-info">
+      <li><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg> Xi'an Jiaotong University</li>
+      <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> Xi'an, China</li>
+      <li><a href="mailto:18032414931@163.com"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg> Email</a></li>
+      <li><a href="https://github.com/TiezMind" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg> GitHub</a></li>
+      <li><a href="https://scholar.google.com/citations?user=PyNoq84AAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-scholar"/></svg> Google Scholar</a></li>
+    </ul>
+  </aside>
+
+  <!-- ============ CONTENT ============ -->
+  <main class="content">
+
+    <section class="section" id="about">
+      <h2 class="section-title"><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg> About Me</h2>
+      <p class="lead">I am a first-year M.S. student in Computer Science &amp; Technology at
+        <b>Xi'an Jiaotong University</b>. I received my B.S. from Yanshan University, ranked
+        <b>1st out of 191</b>. My research focuses on <b>large language models</b> and
+        <b>multimodal / omni-modal foundation models</b>, I have interned at
+        <b>ByteDance&nbsp;Seed</b>, <b>TikTok</b>, and <b>iFLYTEK</b>, working on omni-modal
+        models, large-scale multimodal content understanding, and medical LLMs.</p>
+      <p style="margin-bottom:0">My research interests include:</p>
+      <ul class="intro-list">
+        <li>Multimodal &amp; Omni-modal Language Models</li>
+        <li>LLM Continued Pre-training &amp; Mid-Training &amp; Post-training</li>
+        <li>Efficient &amp; Unified Multimodal Reasoning</li>
+      </ul>
+    </section>
+
+    <section class="section" id="news">
+      <h2 class="section-title"><svg class="icon" aria-hidden="true"><use href="#i-news"/></svg> News</h2>
+      <div class="news-scroll" tabindex="0" aria-label="Recent news, scrollable">
+        <ul class="news-list">
+          <li><span class="news-date">2026/06</span><span>Three papers under review: <b>Visual-OPSD</b>, <b>AERO</b> (COLM&nbsp;2026), and <b>LogicGraph</b> (EMNLP&nbsp;2026).</span></li>
+          <li><span class="news-date">2026/05</span><span>Two papers — <b>AGT<sup>AO</sup></b> (first author) and <b>PhysPRM</b> — <span class="news-hl">accepted to ACL&nbsp;2026</span>.</span></li>
+          <li><span class="news-date">2026/02</span><span>Started a research internship at <span class="news-hl">ByteDance&nbsp;Seed</span>, working on omni-modal (speech modality) foundation models.</span></li>
+          <li><span class="news-date">2025/09</span><span>Began my <span class="news-hl">M.S. at Xi'an Jiaotong University</span>.</span></li>
+          <li><span class="news-date">2025/06</span><span>Received my B.S. from Yanshan University, <b>ranked 1&nbsp;/&nbsp;191</b>.</span></li>
+          <li><span class="news-date">2025/02</span><span>Joined <span class="news-hl">TikTok</span> as a intern on multimodal content understanding.</span></li>
+          <li><span class="news-date">2024/10</span><span>Started as an algorithm intern at <span class="news-hl">iFLYTEK</span>; the work led to a first-author national invention patent.</span></li>
+          <li><span class="news-date">2024/07</span><span><b>EMDFNet</b> <span class="news-hl">accepted to ICANN&nbsp;2024</span> as an <b>Oral</b> presentation.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="publications">
+      <h2 class="section-title"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg> Selected Publications</h2>
+      <p class="pub-legend"><span class="me" style="border-bottom-width:2px">Bold</span> = me. Links open the code / project page where available.</p>
+
+      <!-- 1. AGT-AO -->
+      <article class="publication">
+        <a class="pub-thumb-wrap" href="https://github.com/TiezMind/AGT-unlearning" target="_blank" rel="noopener">
+          <img class="pub-thumb" src="assets/teasers/agtao.png" alt="AGT-AO teaser"></a>
+        <div class="pub-content">
+          <a class="pub-title" href="https://github.com/TiezMind/AGT-unlearning" target="_blank" rel="noopener">AGT<sup>AO</sup>: Robust and Stabilized LLM Unlearning via Adversarial Gating Training with Adaptive Orthogonality</a>
+          <div class="pub-venue"><span class="venue top">ACL 2026 Findings</span></div>
+          <div class="pub-authors"><span class="me">Pengyu Li</span>, Lingling Zhang, Zhitao Gao, Yanrui Wu, Yuxuan Dong, Huan Liu, Bifan Wei, Jun Liu.</div>
+          <div class="pub-links">
+            <a href="https://arxiv.org/pdf/2602.01703" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Paper</a>
+            <a href="https://github.com/TiezMind/AGT-unlearning" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg> Code</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. Visual-OPSD -->
+      <article class="publication">
+        <a class="pub-thumb-wrap" href="https://github.com/TiezMind/Visual-OPSD" target="_blank" rel="noopener">
+          <img class="pub-thumb" src="assets/teasers/visual-opsd.png" alt="Visual-OPSD teaser"></a>
+        <div class="pub-content">
+          <a class="pub-title" href="https://github.com/TiezMind/Visual-OPSD" target="_blank" rel="noopener">Visual-OPSD: Cross-Modal On-Policy Self-Distillation for Efficient Unified Multimodal Reasoning</a>
+          <div class="pub-venue"><span class="venue preprint"></span><span class="status">Under Review</span></div>
+          <div class="pub-authors"><span class="me">Pengyu Li</span>, Zhitao Gao, Lingling Zhang, Muye Huang, Yuanming Li, Fangzhi Xu, Jun Liu.</div>
+          <div class="pub-links">
+            <a href="https://arxiv.org/pdf/2606.18974" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Paper</a>
+            <a href="https://github.com/TiezMind/Visual-OPSD" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg> Code</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. EMDFNet -->
+      <article class="publication">
+        <a class="pub-thumb-wrap" href="https://github.com/TiezMind/EMDFNet" target="_blank" rel="noopener">
+          <img class="pub-thumb" src="assets/teasers/emdfnet.png" alt="EMDFNet teaser"></a>
+        <div class="pub-content">
+          <a class="pub-title" href="https://github.com/TiezMind/EMDFNet" target="_blank" rel="noopener">EMDFNet: Efficient Multi-scale and Diverse Feature Network for Traffic Sign Detection</a>
+          <div class="pub-venue"><span class="venue">ICANN 2024</span><span class="badge-award">Oral</span></div>
+          <div class="pub-authors"><span class="me">Pengyu Li</span>, Chenhe Liu, Tengfei Li, Xinyu Wang, Shihui Zhang, Dongyang Yu</div>
+          <div class="pub-links">
+            <a href="https://aclanthology.org/2026.findings-acl.458.pdf" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Paper</a>
+            <a href="https://github.com/TiezMind/EMDFNet" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg> Code</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. PhysPRM -->
+      <article class="publication">
+        <span class="pub-thumb-wrap"><img class="pub-thumb" src="assets/teasers/physprm.png" alt="PhysPRM teaser"></span>
+        <div class="pub-content">
+          <span class="pub-title">PhysPRM: A Generative Process Reward Model with Fine-grained Diagnosis for Physics Problem Solving</span>
+          <div class="pub-venue"><span class="venue top">ACL 2026 Findings</span></div>
+          <div class="pub-authors">Yuxuan Dong, Xinyu Zhang, Lingling Zhang, Han Lai, <span class="me">Pengyu Li</span>, Bifan Wei, Yaqiang Wu, Jun Liu.</div>
+          <div class="pub-links">
+            <a href="https://aclanthology.org/2026.findings-acl.458.pdf" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Paper</a>
+            <a href="https://github.com/orion-sylvan/PhysPRM" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg> Code</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. AERO -->
+      <article class="publication">
+        <a class="pub-thumb-wrap" href="https://github.com/mira-ai-lab/AERO" target="_blank" rel="noopener">
+          <img class="pub-thumb" src="assets/teasers/aero.png" alt="AERO teaser"></a>
+        <div class="pub-content">
+          <a class="pub-title" href="https://github.com/mira-ai-lab/AERO" target="_blank" rel="noopener">AERO: Autonomous Evolutionary Reasoning Optimization via Endogenous Dual-Loop Feedback</a>
+          <div class="pub-venue"><span class="venue preprint">COLM 2026</span><span class="status">Under Review</span></div>
+          <div class="pub-authors">Zhitao Gao, Jie Ma, Xuhong Li, <span class="me">Pengyu Li</span>, Ning Qu, Yaqiang Wu, Hui Liu, Jun Liu.</div>
+          <div class="pub-links">
+            <a href="https://arxiv.org/pdf/2602.03084" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Paper</a>
+            <a href="https://github.com/mira-ai-lab/AERO" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg> Code</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. LogicGraph -->
+      <article class="publication">
+        <a class="pub-thumb-wrap" href="https://github.com/kkkkarry/LogicGraph" target="_blank" rel="noopener">
+          <img class="pub-thumb" src="assets/teasers/logicgraph.png" alt="LogicGraph teaser"></a>
+        <div class="pub-content">
+          <a class="pub-title" href="https://github.com/kkkkarry/LogicGraph" target="_blank" rel="noopener">LogicGraph: Benchmarking Multi-Path Logical Reasoning via Neuro-Symbolic Generation and Verification</a>
+          <div class="pub-venue"><span class="venue preprint">EMNLP 2026</span><span class="status">Under Review</span></div>
+          <div class="pub-authors">Yanrui Wu, Lingling Zhang, Xinyu Zhang, Jiayu Chang, <span class="me">Pengyu Li</span>, Xu Jiang, Jingtao Hu, Jun Liu.</div>
+          <div class="pub-links">
+            <a href="https://arxiv.org/pdf/2602.21044" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Paper</a>
+            <a href="https://github.com/kkkkarry/LogicGraph" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg> Code</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="experience">
+      <h2 class="section-title"><svg class="icon" aria-hidden="true"><use href="#i-work"/></svg> Experience</h2>
+
+      <div class="entry">
+        <div class="entry-logo"><img src="assets/logos/bytedance.png" alt="ByteDance"></div>
+        <div class="entry-body">
+          <div class="entry-head">
+            <div><span class="entry-role">Research Intern</span> · <span class="entry-org">ByteDance Seed</span></div>
+            <span class="entry-date">2026.02 – Present</span>
+          </div>
+          <div class="entry-sub">Omni-modal Foundation Models · Speech</div>
+          <p class="entry-desc">Work on the speech modality of an omni-modal foundation model across the
+            continued-pretraining / mid-training / SFT pipeline. Built SFT data recipes spanning instruction
+            following, hierarchical audio captioning, audio QA with chain-of-thought, long-form audio grounding,
+            and speech QA, and broadened multilingual ASR/AST coverage. Studied data-composition and
+            task-interference effects when unifying speech into a multi-modal model, and distilled reusable
+            training insights adopted by the team.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-logo"><img src="assets/logos/bytedance.png" alt="TikTok / ByteDance"></div>
+        <div class="entry-body">
+          <div class="entry-head">
+            <div><span class="entry-role">Research Intern</span> · <span class="entry-org">TikTok, ByteDance</span></div>
+            <span class="entry-date">2025.02 – 2025.09</span>
+          </div>
+          <div class="entry-sub">Multimodal Content Understanding</div>
+          <p class="entry-desc">Led a unified multimodal-LLM framework for large-scale short-video content
+            understanding, replacing a stack of task-specific models. Designed a two-stage cascade — a multi-view
+            VLM producing structured descriptions plus a compact LLM for fast downstream inference — and a general
+            multimodal data pipeline (30+ operators) for building large-scale instruction data. Applied
+            training-free token pruning, FP8 quantization, and visual-token compression for a &gt;3× inference
+            speedup, and used RL (GRPO) with CoT cold-start and composite rewards to strengthen reasoning and
+            format-constrained outputs.</p>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-logo"><img src="assets/logos/iflytek.png" alt="iFLYTEK"></div>
+        <div class="entry-body">
+          <div class="entry-head">
+            <div><span class="entry-role">Algorithm Intern</span> · <span class="entry-org">iFLYTEK</span></div>
+            <span class="entry-date">2024.10 – 2025.01</span>
+          </div>
+          <div class="entry-sub">Medical LLM · SFT + DPO</div>
+          <p class="entry-desc">Built an LLM assistant that converts doctors' speech into standardized ultrasound
+            reports with evidence tracing and diagnostic reasoning. Designed a multi-level annotation framework,
+            expanded a real clinical dataset with GPT-4o, and fine-tuned a 13B medical LLM with full-parameter SFT
+            and DPO alignment. The work led to a <b>first-author national invention patent</b> and was deployed to
+            assist clinical diagnosis at a partner hospital.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <h2 class="section-title"><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg> Education</h2>
+      <div class="entry">
+        <div class="entry-logo"><svg class="icon" style="width:26px;height:26px;color:var(--link)" aria-hidden="true"><use href="#i-cap"/></svg></div>
+        <div class="entry-body">
+          <div class="entry-head">
+            <div><span class="entry-role">M.S. in Computer Technology</span> · <span class="entry-org">Xi'an Jiaotong University</span></div>
+            <span class="entry-date">2025.09 – 2028.06</span>
+          </div>
+          <div class="entry-sub">School of Computer Science and Technology</div>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="entry-logo"><svg class="icon" style="width:26px;height:26px;color:var(--link)" aria-hidden="true"><use href="#i-cap"/></svg></div>
+        <div class="entry-body">
+          <div class="entry-head">
+            <div><span class="entry-role">B.S. in Computer Science and Technology</span> · <span class="entry-org">Yanshan University</span></div>
+            <span class="entry-date">2021.09 – 2025.06</span>
+          </div>
+          <div class="entry-sub">School of Information Science and Engineering</div>
+          <p class="entry-desc"><b>Rank 1 / 191</b> · GPA <b>4.13 / 4.50</b> · CET-4 632, CET-6 551</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="honors">
+      <h2 class="section-title"><svg class="icon" aria-hidden="true"><use href="#i-award"/></svg> Honors &amp; Awards</h2>
+      <div class="honor-featured">
+        <svg class="icon" aria-hidden="true"><use href="#i-award"/></svg>
+        <div><b>Beijing Alumni Association Scholarship</b> — awarded to only <b>10 of 38,150</b> students university-wide (across all undergraduate, master's, and doctoral students).</div>
+      </div>
+      <ul class="honor-list">
+        <li><b>First-class Scholarship</b> — six consecutive semesters</li>
+        <li><b>Siyuan Scholarship</b></li>
+        <li><b>Provincial Merit Student</b> (Hebei)</li>
+        <li><b>CCPC</b> (China Collegiate Programming Contest), Hebei — <b>Silver Medal</b></li>
+        <li>"Challenge Cup" National Business-Plan Competition — National <b>Bronze</b></li>
+        <li>National Energy-Saving &amp; Emission-Reduction Competition — National <b>3rd Prize</b></li>
+        <li>RAICOM Robot Developer Contest — National <b>3rd Prize</b></li>
+        <li>National English Competition (NECCS) — National <b>2nd Prize</b></li>
+        <li><b>50+</b> national / provincial / university awards in total</li>
+      </ul>
+    </section>
+
+    <section class="section" id="skills">
+      <h2 class="section-title"><svg class="icon" aria-hidden="true"><use href="#i-tool"/></svg> Technical Skills</h2>
+      <div class="skill-row">
+        <div class="skill-label">Distributed Training &amp; Systems</div>
+        <div class="chips">
+          <span class="chip">DeepSpeed (ZeRO 1/2/3)</span><span class="chip">Megatron-LM</span>
+          <span class="chip">DDP / FSDP</span><span class="chip">Tensor / Pipeline Parallelism</span>
+          <span class="chip">Multi-node Multi-GPU</span><span class="chip">Slurm</span><span class="chip">Docker</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">LLM &amp; Multimodal Algorithms</div>
+        <div class="chips">
+          <span class="chip">Transformer / LLaMA / Qwen / ViT</span><span class="chip">FlashAttention</span>
+          <span class="chip">RoPE</span><span class="chip">RMSNorm</span><span class="chip">Pre-training</span>
+          <span class="chip">SFT</span><span class="chip">RLHF: DPO / PPO / GRPO / DAPO / GSPO</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label">Programming &amp; Tools</div>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">PyTorch</span>
+          <span class="chip">HuggingFace (Transformers / Datasets / Accelerate)</span>
+          <span class="chip">vLLM</span><span class="chip">Linux / Shell</span><span class="chip">Competitive Programming (ACM)</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Pengyu Li · Built as a single static page.<br>
+      Last updated 2026. Thanks for visiting.</p>
+    </footer>
+  </main>
+</div>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
