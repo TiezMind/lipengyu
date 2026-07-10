@@ -114,6 +114,10 @@ h1,h2,h3{font-family:var(--font-head); color:var(--text-strong); line-height:1.2
 .intro-list li{position:relative; padding-left:22px; margin-bottom:7px; line-height:1.55;}
 .intro-list li::before{content:""; position:absolute; left:2px; top:.62em;
   width:7px; height:7px; border-radius:2px; background:var(--link); transform:rotate(45deg);}
+.collaboration-call{margin:18px 0 0; padding:12px 15px; line-height:1.6;
+  border-left:3px solid var(--accent); border-radius:0 8px 8px 0;
+  background:color-mix(in srgb,var(--accent) 6%, transparent);}
+.collaboration-call strong,.collaboration-call a{color:var(--accent); font-weight:700;}
 
 /* ---------- news ---------- */
 .news-scroll{max-height:288px; overflow-y:auto; padding:16px 20px;
@@ -311,13 +315,15 @@ a.pub-title:hover{color:var(--link);}
         <li>LLM Continued Pre-training &amp; Mid-Training &amp; Post-training</li>
         <li>Efficient &amp; Unified Multimodal Reasoning</li>
       </ul>
+      <p class="collaboration-call"><strong>I am actively seeking research collaborations in LLMs and multimodal / omni-modal intelligence.</strong> I am deeply enthusiastic about ambitious, high-impact research—if our interests align, <a href="mailto:18032414931@163.com">please feel free to reach out</a>.</p>
     </section>
 
     <section class="section" id="news">
       <h2 class="section-title"><svg class="icon" aria-hidden="true"><use href="#i-news"/></svg> News</h2>
       <div class="news-scroll" tabindex="0" aria-label="Recent news, scrollable">
         <ul class="news-list">
-          <li><span class="news-date">2026/06</span><span>Three papers under review: <b>Visual-OPSD</b>, <b>AERO</b> (COLM&nbsp;2026), and <b>LogicGraph</b> (EMNLP&nbsp;2026).</span></li>
+          <li><span class="news-date">2026/07</span><span><b>AERO</b> <span class="news-hl">accepted to COLM&nbsp;2026</span>.</span></li>
+          <li><span class="news-date">2026/06</span><span>Two papers under review: <b>Visual-OPSD</b> and <b>LogicGraph</b> (EMNLP&nbsp;2026).</span></li>
           <li><span class="news-date">2026/05</span><span>Two papers — <b>AGT<sup>AO</sup></b> (first author) and <b>PhysPRM</b> — <span class="news-hl">accepted to ACL&nbsp;2026</span>.</span></li>
           <li><span class="news-date">2026/02</span><span>Started a research internship at <span class="news-hl">ByteDance&nbsp;Seed</span>, working on omni-modal (speech modality) foundation models.</span></li>
           <li><span class="news-date">2025/09</span><span>Began my <span class="news-hl">M.S. at Xi'an Jiaotong University</span>.</span></li>
@@ -339,7 +345,7 @@ a.pub-title:hover{color:var(--link);}
           <img class="pub-thumb" src="assets/teasers/agtao.png" alt="AGT-AO teaser"></a>
         <div class="pub-content">
           <a class="pub-title" href="https://github.com/TiezMind/AGT-unlearning" target="_blank" rel="noopener">AGT<sup>AO</sup>: Robust and Stabilized LLM Unlearning via Adversarial Gating Training with Adaptive Orthogonality</a>
-          <div class="pub-venue"><span class="venue top">ACL 2026 Findings</span></div>
+          <div class="pub-venue"><span class="venue top">ACL 2026</span></div>
           <div class="pub-authors"><span class="me">Pengyu Li</span>, Lingling Zhang, Zhitao Gao, Yanrui Wu, Yuxuan Dong, Huan Liu, Bifan Wei, Jun Liu.</div>
           <div class="pub-links">
             <a href="https://arxiv.org/pdf/2602.01703" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Paper</a>
@@ -378,31 +384,31 @@ a.pub-title:hover{color:var(--link);}
         </div>
       </article>
 
-      <!-- 4. PhysPRM -->
-      <article class="publication">
-        <span class="pub-thumb-wrap"><img class="pub-thumb" src="assets/teasers/physprm.png" alt="PhysPRM teaser"></span>
-        <div class="pub-content">
-          <span class="pub-title">PhysPRM: A Generative Process Reward Model with Fine-grained Diagnosis for Physics Problem Solving</span>
-          <div class="pub-venue"><span class="venue top">ACL 2026 Findings</span></div>
-          <div class="pub-authors">Yuxuan Dong, Xinyu Zhang, Lingling Zhang, Han Lai, <span class="me">Pengyu Li</span>, Bifan Wei, Yaqiang Wu, Jun Liu.</div>
-          <div class="pub-links">
-            <a href="https://aclanthology.org/2026.findings-acl.458.pdf" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Paper</a>
-            <a href="https://github.com/orion-sylvan/PhysPRM" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg> Code</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- 5. AERO -->
+      <!-- 4. AERO -->
       <article class="publication">
         <a class="pub-thumb-wrap" href="https://github.com/mira-ai-lab/AERO" target="_blank" rel="noopener">
           <img class="pub-thumb" src="assets/teasers/aero.png" alt="AERO teaser"></a>
         <div class="pub-content">
           <a class="pub-title" href="https://github.com/mira-ai-lab/AERO" target="_blank" rel="noopener">AERO: Autonomous Evolutionary Reasoning Optimization via Endogenous Dual-Loop Feedback</a>
-          <div class="pub-venue"><span class="venue preprint">COLM 2026</span><span class="status">Under Review</span></div>
+          <div class="pub-venue"><span class="venue top">COLM 2026</span></div>
           <div class="pub-authors">Zhitao Gao, Jie Ma, Xuhong Li, <span class="me">Pengyu Li</span>, Ning Qu, Yaqiang Wu, Hui Liu, Jun Liu.</div>
           <div class="pub-links">
             <a href="https://arxiv.org/pdf/2602.03084" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Paper</a>
             <a href="https://github.com/mira-ai-lab/AERO" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg> Code</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. PhysPRM -->
+      <article class="publication">
+        <span class="pub-thumb-wrap"><img class="pub-thumb" src="assets/teasers/physprm.png" alt="PhysPRM teaser"></span>
+        <div class="pub-content">
+          <span class="pub-title">PhysPRM: A Generative Process Reward Model with Fine-grained Diagnosis for Physics Problem Solving</span>
+          <div class="pub-venue"><span class="venue top">ACL 2026</span></div>
+          <div class="pub-authors">Yuxuan Dong, Xinyu Zhang, Lingling Zhang, Han Lai, <span class="me">Pengyu Li</span>, Bifan Wei, Yaqiang Wu, Jun Liu.</div>
+          <div class="pub-links">
+            <a href="https://aclanthology.org/2026.findings-acl.458.pdf" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg> Paper</a>
+            <a href="https://github.com/orion-sylvan/PhysPRM" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg> Code</a>
           </div>
         </div>
       </article>
