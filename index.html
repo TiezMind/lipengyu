@@ -120,6 +120,24 @@ h1,h2,h3{font-family:var(--font-head); color:var(--text-strong); line-height:1.2
 .collaboration-call strong,.collaboration-call a{color:var(--accent); font-weight:700;}
 
 /* ---------- news ---------- */
+.news-group-label{margin:0 0 9px; color:var(--text-muted); font-size:.76rem;
+  font-weight:700; letter-spacing:.08em; text-transform:uppercase;}
+.news-featured{margin-bottom:18px;}
+.news-featured-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px;}
+.news-featured-card{min-width:0; padding:15px 17px; border:1px solid var(--border-strong);
+  border-top:3px solid var(--link); border-radius:var(--radius);
+  background:linear-gradient(145deg,color-mix(in srgb,var(--link) 7%,var(--surface)),var(--surface) 65%);
+  box-shadow:var(--shadow-card);}
+.news-featured-head{display:flex; align-items:baseline; justify-content:space-between;
+  gap:12px; margin-bottom:7px;}
+.news-featured-head h3{margin:0; font-size:1.04rem;}
+.news-featured-date{flex:none; padding:1px 7px; border-radius:5px;
+  background:var(--news-date-bg); color:var(--link); font-family:var(--font-mono);
+  font-size:.72rem; font-weight:700; font-feature-settings:"tnum"; white-space:nowrap;}
+.news-featured-card>p{margin:0; color:var(--text); font-size:.89rem; line-height:1.55;}
+.news-featured-links{display:flex; flex-wrap:wrap; gap:12px; margin-top:10px;}
+.news-featured-links a{font-size:.76rem; font-weight:700; letter-spacing:.35px;
+  text-transform:uppercase;}
 .news-scroll{max-height:288px; overflow-y:auto; padding:16px 20px;
   border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-elev);
   -webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 26px),transparent);
@@ -188,7 +206,7 @@ a.pub-title:hover{color:var(--link);}
 .entry-sub{color:var(--text-muted); font-size:.9rem; margin:1px 0 8px;}
 .entry-desc{font-size:.94rem; line-height:1.62; margin:0; color:var(--text);}
 
-/* ---------- honors / skills ---------- */
+/* ---------- honors ---------- */
 .honor-featured{display:flex; gap:12px; align-items:flex-start; position:relative;
   background:linear-gradient(100deg, color-mix(in srgb,var(--accent) 8%, transparent), transparent 70%);
   border:1px solid var(--border); border-left:3px solid var(--accent);
@@ -201,11 +219,6 @@ a.pub-title:hover{color:var(--link);}
 .honor-list li::before{content:""; position:absolute; left:3px; top:.6em;
   width:6px; height:6px; border-radius:50%; background:var(--accent); opacity:.7;}
 .honor-list b{color:var(--text-strong);}
-.skill-row{margin-bottom:14px;}
-.skill-label{font-weight:700; color:var(--text-strong); font-size:.95rem; margin-bottom:6px;}
-.chips{display:flex; flex-wrap:wrap; gap:7px;}
-.chip{font-size:.82rem; padding:3px 11px; border-radius:50px; background:var(--pill-bg);
-  border:1px solid var(--border); color:var(--text);}
 
 /* ---------- theme toggle ---------- */
 .theme-toggle{flex:none; width:38px; height:38px; border-radius:9px;
@@ -228,6 +241,7 @@ a.pub-title:hover{color:var(--link);}
   .sidebar{position:static;}
   .topnav-inner{padding:0 16px; gap:10px; height:54px;}
   .avatar{width:150px; height:150px;}
+  .news-featured-grid{grid-template-columns:1fr;}
   .honor-list{columns:1;}
   .publication{flex-direction:column; gap:14px;}
   .pub-thumb-wrap{flex:none; width:100%;}
@@ -258,7 +272,6 @@ a.pub-title:hover{color:var(--link);}
 <symbol id="i-work" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
 <symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/></symbol>
 <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.21 13.89 7 22l5-3 5 3-1.21-8.11"/></symbol>
-<symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.7 2.7-2-2 2.7-2.7z"/></symbol>
 <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
 </defs></svg>
@@ -274,7 +287,6 @@ a.pub-title:hover{color:var(--link);}
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
       <a href="#honors">Honors</a>
-      <a href="#skills">Skills</a>
     </div>
     <button class="theme-toggle" onclick="(function(){var d=document.documentElement,n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}})()" aria-label="Toggle dark mode">
       <svg class="icon i-sun" aria-hidden="true"><use href="#i-sun"/></svg>
@@ -307,8 +319,8 @@ a.pub-title:hover{color:var(--link);}
         <b>Xi'an Jiaotong University</b>. I received my B.S. from Yanshan University, ranked
         <b>1st out of 191</b>. My research focuses on <b>large language models</b> and
         <b>multimodal / omni-modal foundation models</b>. I have interned at
-        <b>ByteDance&nbsp;Seed</b>, <b>TikTok</b>, and <b>iFLYTEK</b>, working on omni-modal
-        data and training optimization, large-scale multimodal content understanding, and medical LLMs.</p>
+        <b>ByteDance&nbsp;Seed</b> and <b>TikTok</b>, working on data and training optimization
+        for omni-modal models as well as large-scale multimodal content understanding.</p>
       <p style="margin-bottom:0">My research interests include:</p>
       <ul class="intro-list">
         <li>Multimodal &amp; Omni-modal Foundation Models</li>
@@ -320,16 +332,43 @@ a.pub-title:hover{color:var(--link);}
 
     <section class="section" id="news">
       <h2 class="section-title"><svg class="icon" aria-hidden="true"><use href="#i-news"/></svg> News</h2>
+      <div class="news-featured" aria-label="Featured work at ByteDance Seed">
+        <p class="news-group-label">Featured at ByteDance Seed</p>
+        <div class="news-featured-grid">
+          <article class="news-featured-card">
+            <div class="news-featured-head">
+              <h3>SeedRealtime</h3>
+              <span class="news-featured-date">2026/08</span>
+            </div>
+            <p>A native audio-visual full-duplex LLM for continuous, omni-modal natural interaction.</p>
+            <div class="news-featured-links">
+              <a href="https://seed.bytedance.com/en/blog/seedrealtime-audio-visual-full-duplex-llm-released-toward-omni-modal-natural-interaction" target="_blank" rel="noopener">Tech Blog</a>
+            </div>
+          </article>
+          <article class="news-featured-card">
+            <div class="news-featured-head">
+              <h3>Seed2.0 Lite</h3>
+              <span class="news-featured-date">2026/04</span>
+            </div>
+            <p>The Seed family's first omni-modal understanding model, unifying video, image, audio, and text.</p>
+            <div class="news-featured-links">
+              <a href="https://lf3-static.bytednsdoc.com/obj/eden-cn/lapzild-tss/ljhwZthlaukjlkulzlp/seed2/0214/Seed2.0%20Model%20Card.pdf" target="_blank" rel="noopener">Model Card</a>
+              <a href="https://seed.bytedance.com/en/seed2" target="_blank" rel="noopener">Official Page</a>
+            </div>
+          </article>
+        </div>
+      </div>
+      <p class="news-group-label">Recent Updates</p>
       <div class="news-scroll" tabindex="0" aria-label="Recent news, scrollable">
         <ul class="news-list">
+          <li><span class="news-date">2026/07</span><span>Two papers under review: <b>GLaQ</b> and <b>QUMem</b>.</span></li>
           <li><span class="news-date">2026/07</span><span><b>AERO</b> <span class="news-hl">accepted to COLM&nbsp;2026</span>.</span></li>
-          <li><span class="news-date">2026/06</span><span>Two papers under review: <b>Visual-OPSD</b> and <b>LogicGraph</b> (EMNLP&nbsp;2026).</span></li>
+          <li><span class="news-date">2026/06</span><span>Two papers under review: <b>Visual-OPSD</b> and <b>LogicGraph</b>.</span></li>
           <li><span class="news-date">2026/05</span><span>Two papers — <b>AGT<sup>AO</sup></b> (first author) and <b>PhysPRM</b> — <span class="news-hl">accepted to ACL&nbsp;2026</span>.</span></li>
           <li><span class="news-date">2026/02</span><span>Started a research internship at <span class="news-hl">ByteDance&nbsp;Seed</span>, working on data and training optimization for omni-modal foundation models.</span></li>
           <li><span class="news-date">2025/09</span><span>Began my <span class="news-hl">M.S. at Xi'an Jiaotong University</span>.</span></li>
           <li><span class="news-date">2025/06</span><span>Received my B.S. from Yanshan University, <b>ranked 1&nbsp;/&nbsp;191</b>.</span></li>
           <li><span class="news-date">2025/02</span><span>Joined <span class="news-hl">TikTok</span> as an intern on multimodal content understanding.</span></li>
-          <li><span class="news-date">2024/10</span><span>Started as an algorithm intern at <span class="news-hl">iFLYTEK</span>; the work led to a first-author national invention patent.</span></li>
           <li><span class="news-date">2024/07</span><span><b>EMDFNet</b> <span class="news-hl">accepted to ICANN&nbsp;2024</span> as an <b>Oral</b> presentation.</span></li>
         </ul>
       </div>
@@ -436,7 +475,7 @@ a.pub-title:hover{color:var(--link);}
         <div class="entry-logo"><img src="assets/logos/bytedance.png" alt="ByteDance"></div>
         <div class="entry-body">
           <div class="entry-head">
-            <div><span class="entry-role">Research Intern</span> · <span class="entry-org">ByteDance Seed</span></div>
+            <div><span class="entry-role">Intern</span> · <span class="entry-org">ByteDance Seed</span></div>
             <span class="entry-date">2026.02 – Present</span>
           </div>
           <div class="entry-sub">Seed-Omni · Data &amp; Training Optimization</div>
@@ -456,7 +495,7 @@ a.pub-title:hover{color:var(--link);}
         <div class="entry-logo"><img src="assets/logos/bytedance.png" alt="TikTok / ByteDance"></div>
         <div class="entry-body">
           <div class="entry-head">
-            <div><span class="entry-role">Research Intern</span> · <span class="entry-org">TikTok, ByteDance</span></div>
+            <div><span class="entry-role">Intern</span> · <span class="entry-org">TikTok, ByteDance</span></div>
             <span class="entry-date">2025.02 – 2025.09</span>
           </div>
           <div class="entry-sub">EcoMLLM · Multimodal Content Understanding</div>
@@ -471,22 +510,6 @@ a.pub-title:hover{color:var(--link);}
         </div>
       </div>
 
-      <div class="entry">
-        <div class="entry-logo"><img src="assets/logos/iflytek.png" alt="iFLYTEK"></div>
-        <div class="entry-body">
-          <div class="entry-head">
-            <div><span class="entry-role">Algorithm Intern</span> · <span class="entry-org">iFLYTEK</span></div>
-            <span class="entry-date">2024.10 – 2025.01</span>
-          </div>
-          <div class="entry-sub">Medical LLM · SFT + DPO</div>
-          <p class="entry-desc">Built an LLM assistant that converts doctors' speech into standardized ultrasound
-            reports with evidence tracing and diagnostic reasoning. Designed a multi-level annotation framework,
-            expanded 200 real clinical audio-report pairs to 1,000 with GPT-4o, and fine-tuned a 13B medical LLM
-            with full-parameter SFT and DPO alignment. The system achieved an 80%+ qualified-report rate; the work
-            led to a <b>first-author national invention patent</b> and was deployed to assist clinical diagnosis at
-            a partner hospital.</p>
-        </div>
-      </div>
     </section>
 
     <section class="section" id="education">
@@ -535,46 +558,9 @@ a.pub-title:hover{color:var(--link);}
       </ul>
     </section>
 
-    <section class="section" id="skills">
-      <h2 class="section-title"><svg class="icon" aria-hidden="true"><use href="#i-tool"/></svg> Core Expertise &amp; Technical Skills</h2>
-      <div class="skill-row">
-        <div class="skill-label">Omni-modal Data &amp; Training</div>
-        <div class="chips">
-          <span class="chip">Continued Pre-training / Mid-training</span><span class="chip">SFT / RL</span>
-          <span class="chip">Data Recipe Design</span><span class="chip">Quality Governance</span>
-          <span class="chip">Loss &amp; Token-level Diagnostics</span><span class="chip">Regression Attribution</span>
-        </div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-label">Distributed Training &amp; Data Systems</div>
-        <div class="chips">
-          <span class="chip">DeepSpeed (ZeRO 1/2/3)</span><span class="chip">Megatron-LM</span>
-          <span class="chip">DDP / FSDP</span><span class="chip">Tensor / Pipeline Parallelism</span>
-          <span class="chip">Multi-node Multi-GPU</span><span class="chip">Ray / Merlin</span>
-          <span class="chip">Slurm / Docker</span>
-        </div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-label">Models &amp; Algorithms</div>
-        <div class="chips">
-          <span class="chip">Transformer / LLaMA / Qwen / ViT</span><span class="chip">FlashAttention</span>
-          <span class="chip">RoPE / RMSNorm</span><span class="chip">Token Pruning / FP8</span>
-          <span class="chip">RLHF: DPO / PPO / GRPO / DAPO / GSPO</span>
-        </div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-label">Programming &amp; Tools</div>
-        <div class="chips">
-          <span class="chip">Python</span><span class="chip">PyTorch</span>
-          <span class="chip">HuggingFace (Transformers / Datasets / Accelerate)</span>
-          <span class="chip">vLLM</span><span class="chip">Linux / Shell</span><span class="chip">Competitive Programming (ACM)</span>
-        </div>
-      </div>
-    </section>
-
     <footer class="footer">
       <p>© <span id="year"></span> Pengyu Li · Built as a single static page.<br>
-      Last updated July 2026. Thanks for visiting.</p>
+      Last updated August 2026. Thanks for visiting.</p>
     </footer>
   </main>
 </div>
