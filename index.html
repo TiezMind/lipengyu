@@ -4,13 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pengyu Li (李鹏宇)</title>
-<meta name="description" content="Pengyu Li (李鹏宇) — M.S. student in Computer Technology at Xi'an Jiaotong University working on large language models, multimodal and omni-modal foundation models, and data and training optimization.">
+<meta name="description" content="Pengyu Li (李鹏宇) — M.S. student in Computer Technology at Xi'an Jiaotong University working on large language models, multimodal and omni-modal foundation models, and high-quality multimodal data synthesis.">
 <meta name="author" content="Pengyu Li">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F4E9B'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-weight='700' fill='white' text-anchor='middle'%3EPL%3C/text%3E%3C/svg%3E">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Pengyu Li (李鹏宇)">
-<meta property="og:description" content="M.S. student at Xi'an Jiaotong University — LLMs, multimodal and omni-modal foundation models, data curation, and model training.">
+<meta property="og:description" content="M.S. student at Xi'an Jiaotong University — LLMs, multimodal and omni-modal foundation models, data synthesis, and capability evaluation.">
 
 <!-- Fonts (degrade gracefully to system stack if the CDN is blocked) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -322,13 +322,13 @@ a.pub-title:hover{color:var(--link);}
         <b>Xi'an Jiaotong University</b>. I received my B.S. from Yanshan University, ranked
         <b>1st out of 191</b>. My research focuses on <b>large language models</b> and
         <b>multimodal / omni-modal foundation models</b>. I have interned at
-        <b>ByteDance&nbsp;Seed</b> and <b>TikTok</b>, working on data and training optimization
-        for omni-modal models as well as large-scale multimodal content understanding.</p>
+        <b>ByteDance&nbsp;Seed</b> and <b>TikTok</b>, working on high-quality data synthesis and
+        ablation for omni-modal models as well as large-scale multimodal content understanding.</p>
       <p style="margin-bottom:0">My research interests include:</p>
       <ul class="intro-list">
         <li>Multimodal &amp; Omni-modal Foundation Models</li>
         <li>Continued Pre-training, Mid-training &amp; Post-training</li>
-        <li>Data Curation, Training Diagnostics &amp; Efficient Multimodal Reasoning</li>
+        <li>Data Curation, Ablation Studies &amp; Efficient Multimodal Reasoning</li>
       </ul>
       <p class="collaboration-call"><strong>I am actively seeking research collaborations in LLMs and multimodal / omni-modal intelligence.</strong> I am deeply enthusiastic about ambitious, high-impact research—if our interests align, <a href="mailto:18032414931@163.com">please feel free to reach out</a>.</p>
     </section>
@@ -371,7 +371,7 @@ a.pub-title:hover{color:var(--link);}
           <li><span class="news-date">2026/07</span><span><b>AERO</b> <span class="news-hl">accepted to COLM&nbsp;2026</span>.</span></li>
           <li><span class="news-date">2026/06</span><span>Two papers under review: <b>Visual-OPSD</b> and <b>LogicGraph</b>.</span></li>
           <li><span class="news-date">2026/05</span><span>Two papers — <b>AGT<sup>AO</sup></b> (first author) and <b>PhysPRM</b> — <span class="news-hl">accepted to ACL&nbsp;2026</span>.</span></li>
-          <li><span class="news-date">2026/02</span><span>Started a research internship at <span class="news-hl">ByteDance&nbsp;Seed</span>, working on data and training optimization for omni-modal foundation models.</span></li>
+          <li><span class="news-date">2026/02</span><span>Started a research internship at <span class="news-hl">ByteDance&nbsp;Seed</span>, working on multimodal data synthesis and ablation for omni-modal foundation models.</span></li>
           <li><span class="news-date">2025/09</span><span>Began my <span class="news-hl">M.S. at Xi'an Jiaotong University</span>.</span></li>
           <li><span class="news-date">2025/06</span><span>Received my B.S. from Yanshan University, <b>ranked 1&nbsp;/&nbsp;191</b>.</span></li>
           <li><span class="news-date">2025/02</span><span>Joined <span class="news-hl">TikTok</span> as an intern on multimodal content understanding.</span></li>
@@ -512,16 +512,14 @@ a.pub-title:hover{color:var(--link);}
             <div><span class="entry-role">Intern</span> · <span class="entry-org">ByteDance Seed</span></div>
             <span class="entry-date">2026.02 – Present</span>
           </div>
-          <div class="entry-sub">Seed-Omni · Data &amp; Training Optimization</div>
-          <p class="entry-desc">Worked on data and training optimization for Seed-Omni, spanning continued
-            pre-training and mid-training across speech, text, and vision. Built a three-stage data-governance
-            pipeline combining rule-based filtering, LLM-assisted review, and modality validation, together with
-            sample- and token-level diagnostics for tracing loss spikes, data conflicts, and capability regressions.
-            Developed reusable production and synthesis pipelines for dialect speech, VS2T, audio captioning and QA,
-            SpeechQA, and long-form interleaved data, improving key workflows by up to 50×. Took end-to-end ownership
-            of a 12B/128K, 463B-token mid-training run—from data recipe and training configuration through monitoring,
-            checkpoint selection, evaluation, and regression attribution—and distilled the findings into reusable
-            team practices.</p>
+          <div class="entry-sub">Seed-Omni · Multimodal Data Synthesis &amp; Ablation</div>
+          <p class="entry-desc">Focused on high-quality multimodal data synthesis and ablation studies for Seed-Omni, building efficient,
+            reusable pipelines for dialect speech, foundational S2T reasoning, long-form audio, and VS2T synthesis.
+            Designed scalable production and quality-control workflows that improved key synthesis processes by up to
+            50×. Led controlled ablation studies for each newly introduced data type to isolate capability gains,
+            regressions, and distribution conflicts. Systematically distilled insights from experimental behavior,
+            evaluation results, and case analyses into reusable data recipes, quality criteria, and iteration
+            guidelines for subsequent releases.</p>
         </div>
       </div>
 
@@ -533,7 +531,7 @@ a.pub-title:hover{color:var(--link);}
             <span class="entry-date">2025.02 – 2025.09</span>
           </div>
           <div class="entry-sub">EcoMLLM · Multimodal Content Understanding</div>
-          <p class="entry-desc">Led EcoMLLM, a unified multimodal-LLM framework for large-scale short-video content
+          <p class="entry-desc">Contributed EcoMLLM, a unified multimodal-LLM framework for large-scale short-video content
             understanding that replaced a stack of task-specific models. Designed a two-stage cascade—a multi-view
             VLM producing structured descriptions plus a compact LLM for fast downstream inference—and built Juggle
             Pipeline, a Ray + Merlin data system with 30+ operators for constructing large-scale instruction data.
