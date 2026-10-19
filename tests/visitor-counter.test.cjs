@@ -7,7 +7,6 @@ const vm = require('node:vm');
 const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 const source = html.match(/<script id="visitor-counter-script">([\s\S]*?)<\/script>/)[1];
 const pageUrl = 'https://tiezmind.github.io/lipengyu/';
-const storageKey = 'homepage:busuanzi-identity';
 
 async function run(options = {}) {
   const elements = {
@@ -16,27 +15,19 @@ async function run(options = {}) {
       attributes: {},
       setAttribute(name, value) { this.attributes[name] = value; }
     },
-    'visitor-count': { textContent: '--' },
     'page-view-count': { textContent: '--' }
   };
   const requests = [];
-  const saved = [];
+  let storageAccesses = 0;
   let timeout;
   let cleared = false;
   const context = {
     document: { getElementById: id => elements[id] },
     window: { location: new URL(options.url || pageUrl) },
     URL, AbortController, Intl,
-    localStorage: {
-      getItem(key) {
-        assert.equal(key, storageKey);
-        if (options.storageBlocked) throw new Error('Storage blocked');
-        return options.identity || null;
-      },
-      setItem(key, value) {
-        if (options.storageBlocked) throw new Error('Storage blocked');
-        saved.push([key, value]);
-      }
+    get localStorage() {
+      storageAccesses++;
+      throw new Error('Counter must not access browser storage');
     },
     setTimeout(callback, milliseconds) {
       assert.equal(milliseconds, 8000);
@@ -57,7 +48,6 @@ async function run(options = {}) {
       if (options.networkError) throw new Error('Network error');
       return {
         ok: options.httpOk !== false,
-        headers: { get: name => name === 'Set-Bsz-Identity' ? 'signed-token' : null },
         async json() {
           if (options.invalidJson) throw new SyntaxError('Invalid JSON');
           return Object.hasOwn(options, 'result') ? options.result : {
@@ -71,21 +61,21 @@ async function run(options = {}) {
   vm.runInNewContext(source, context);
   if (options.pending) timeout();
   await new Promise(resolve => setImmediate(resolve));
-  return { elements, requests, saved, cleared };
+  return { elements, requests, storageAccesses, cleared };
 }
 
-test('uses page-level counts, canonical URL, and the service identity', async () => {
-  const { elements, requests, saved, cleared } = await run({ identity: 'previous-token' });
-  assert.equal(elements['visitor-count'].textContent, '1,234');
+test('uses only page views and preserves the canonical page key', async () => {
+  const { elements, requests, storageAccesses, cleared } = await run();
   assert.equal(elements['page-view-count'].textContent, '5,678');
   assert.equal(requests.length, 1);
   assert.equal(requests[0].url, 'https://bsz.iirose.cn/api');
   assert.equal(requests[0].method, 'POST');
   assert.equal(requests[0].headers['x-bsz-referer'], pageUrl);
-  assert.equal(requests[0].headers.Authorization, 'Bearer previous-token');
+  assert.equal(requests[0].headers.Authorization, undefined);
   assert.equal(requests[0].credentials, 'omit');
   assert.equal(requests[0].referrerPolicy, 'no-referrer');
-  assert.deepEqual(saved, [[storageKey, 'signed-token']]);
+  assert.equal(storageAccesses, 0);
+  assert.match(elements['visitor-stats'].title, /Total page views, including repeat visits/);
   assert.equal(elements['visitor-stats'].attributes['aria-busy'], 'false');
   assert.equal(cleared, true);
 });
@@ -108,20 +98,24 @@ test('does not count local previews, mirrors, or unrelated project pages', async
     const { elements, requests, cleared } = await run({ url });
     assert.equal(requests.length, 0);
     assert.equal(cleared, false);
-    assert.equal(elements['visitor-count'].textContent, '--');
+    assert.equal(elements['page-view-count'].textContent, '--');
     assert.match(elements['visitor-stats'].title, /published homepage/);
   }
 });
 
-test('still displays counts when browser storage is blocked', async () => {
-  const { elements, requests } = await run({ storageBlocked: true });
-  assert.equal(elements['visitor-count'].textContent, '1,234');
-  assert.equal(requests[0].headers.Authorization, undefined);
+test('does not depend on unique visitor counts', async () => {
+  for (const data of [
+    { page_pv: 5 },
+    { page_pv: 5, page_uv: -1 },
+    { page_pv: 5, page_uv: 'invalid' }
+  ]) {
+    const { elements } = await run({ result: { success: true, data } });
+    assert.equal(elements['page-view-count'].textContent, '5');
+  }
 });
 
 test('displays real zero counts', async () => {
-  const { elements } = await run({ result: { success: true, data: { page_uv: 0, page_pv: 0 } } });
-  assert.equal(elements['visitor-count'].textContent, '0');
+  const { elements } = await run({ result: { success: true, data: { page_pv: 0 } } });
   assert.equal(elements['page-view-count'].textContent, '0');
 });
 
@@ -130,19 +124,17 @@ test('fails gracefully without fake counts or retries', async () => {
     { networkError: true }, { httpOk: false }, { invalidJson: true }, { pending: true },
     { result: null }, { result: { success: false } },
     { result: { success: true, data: {} } },
-    { result: { success: true, data: { page_uv: -1, page_pv: 5 } } },
-    { result: { success: true, data: { page_uv: 1, page_pv: -5 } } },
-    { result: { success: true, data: { page_uv: '1', page_pv: 5 } } },
-    { result: { success: true, data: { page_uv: 1.5, page_pv: 5 } } },
-    { result: { success: true, data: { page_uv: 1, page_pv: Number.MAX_SAFE_INTEGER + 1 } } }
+    { result: { success: true, data: { page_pv: -5 } } },
+    { result: { success: true, data: { page_pv: '5' } } },
+    { result: { success: true, data: { page_pv: 1.5 } } },
+    { result: { success: true, data: { page_pv: Number.MAX_SAFE_INTEGER + 1 } } }
   ]) {
-    const { elements, requests, saved, cleared } = await run(options);
-    assert.equal(elements['visitor-count'].textContent, '--');
+    const { elements, requests, storageAccesses, cleared } = await run(options);
     assert.equal(elements['page-view-count'].textContent, '--');
     assert.match(elements['visitor-stats'].title, /temporarily unavailable/);
     assert.equal(elements['visitor-stats'].attributes['aria-busy'], 'false');
     assert.equal(requests.length, 1);
-    assert.deepEqual(saved, []);
+    assert.equal(storageAccesses, 0);
     assert.equal(cleared, true);
   }
 });

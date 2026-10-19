@@ -103,8 +103,7 @@ h1,h2,h3{font-family:var(--font-head); color:var(--text-strong); line-height:1.2
   padding:5px 8px; margin:-3px -8px; border-radius:8px; color:var(--text); font-weight:500;}
 .profile-info a:hover{color:var(--link); background:var(--bg-elev);}
 .profile-info .icon{flex:none; color:var(--link); width:1.06em; height:1.06em; stroke-width:2;}
-.visitor-stats{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px;
-  margin:18px 0 0; padding:14px 2px 0; border-top:1px solid var(--border);}
+.visitor-stats{margin:18px 0 0; padding:14px 2px 0; border-top:1px solid var(--border);}
 .visitor-stats dt{display:flex; align-items:center; gap:7px; color:var(--text-muted);
   font-size:.78rem; line-height:1.5;}
 .visitor-stats .icon{flex:none; color:var(--link);}
@@ -321,13 +320,9 @@ a.pub-title:hover{color:var(--link);}
     </ul>
     <dl class="visitor-stats" id="visitor-stats" data-page="https://tiezmind.github.io/lipengyu/"
         aria-label="Homepage traffic" aria-live="polite"
-        title="Estimated visitors and page views since tracking began.">
+        title="Total page views since tracking began, including repeat visits.">
       <div>
-        <dt><svg class="icon" aria-hidden="true"><use href="#i-user"/></svg> Visitors</dt>
-        <dd id="visitor-count">--</dd>
-      </div>
-      <div>
-        <dt><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg> Page views</dt>
+        <dt><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg> Visitors</dt>
         <dd id="page-view-count">--</dd>
       </div>
     </dl>
@@ -630,20 +625,12 @@ a.pub-title:hover{color:var(--link);}
   }
 
   // Busuanzi API endpoint follows the official https://busuanzi.9420.ltd/js client.
-  // UV is an estimate based on the service's IP/User-Agent identity and saved token.
-  var storageKey='homepage:busuanzi-identity';
-  var headers={'x-bsz-referer':page.href};
-  try{
-    var identity=localStorage.getItem(storageKey);
-    if(identity)headers.Authorization='Bearer '+identity;
-  }catch(e){}
-
   var controller=new AbortController();
   var timeout=setTimeout(function(){controller.abort();},8000);
   stats.setAttribute('aria-busy','true');
   fetch('https://bsz.iirose.cn/api',{
     method:'POST',
-    headers:headers,
+    headers:{'x-bsz-referer':page.href},
     credentials:'omit',
     referrerPolicy:'no-referrer',
     signal:controller.signal
@@ -652,18 +639,12 @@ a.pub-title:hover{color:var(--link);}
     return response.json().then(function(result){
       var data=result&&result.data;
       if(!result||result.success!==true||!data||
-          !Number.isSafeInteger(data.page_uv)||data.page_uv<0||
           !Number.isSafeInteger(data.page_pv)||data.page_pv<0){
         throw new Error('Invalid visitor statistics');
       }
-      try{
-        var identity=response.headers.get('Set-Bsz-Identity');
-        if(identity)localStorage.setItem(storageKey,identity);
-      }catch(e){}
       var format=new Intl.NumberFormat('en-US');
-      document.getElementById('visitor-count').textContent=format.format(data.page_uv);
       document.getElementById('page-view-count').textContent=format.format(data.page_pv);
-      stats.title='Estimated unique visitors and page views, provided by Busuanzi.';
+      stats.title='Total page views, including repeat visits, provided by Busuanzi.';
     });
   }).catch(function(){
     stats.title='Visitor statistics are temporarily unavailable.';
